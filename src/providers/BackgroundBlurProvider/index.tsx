@@ -110,7 +110,11 @@ export const BackgroundBlurProvider: FC<React.PropsWithChildren<Props>> = ({
     logger.info(
       `Initializing background blur processor with, spec: ${JSON.stringify(
         spec
-      )}, options: ${JSON.stringify(options)}`
+      )}, options: { blurStrength: ${
+        options?.blurStrength
+      }, filterCPUUtilization: ${
+        options?.filterCPUUtilization
+      }, reportingPeriodMillis: ${options?.reportingPeriodMillis} }`
     );
 
     try {
@@ -128,11 +132,7 @@ export const BackgroundBlurProvider: FC<React.PropsWithChildren<Props>> = ({
         setIsBackgroundBlurSupported(false);
         return undefined;
       } else {
-        logger.info(
-          `Initialized background blur processor: ${JSON.stringify(
-            createdProcessor
-          )}`
-        );
+        logger.info('Initialized background blur processor');
         setBackgroundBlurProcessor(createdProcessor);
         setIsBackgroundBlurSupported(true);
         return createdProcessor;

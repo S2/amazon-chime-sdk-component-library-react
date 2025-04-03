@@ -8,9 +8,13 @@ on:
 
 permissions:
   id-token: write   # This is required for requesting the JWT
+  pages: write
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.build-publish.outputs.page_url }}
     name: Deploy Demo App and Storybook
     runs-on: ubuntu-latest
     env:
@@ -67,7 +71,9 @@ jobs:
           echo $result
           echo ::set-output name=need_deploy::$result
       - name: Publish Storybook Documentation
+        id: build-publish
         if: startsWith(steps.need_deploy.outputs.need_deploy, 'Deploy storybook')
-        run: npm run deploy-storybook -- --ci
-        env:
-          GH_TOKEN: chime-sdk-js-bot:${{ secrets.GITHUBPAGES}}
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        with:
+          path: storybook-static 
+          checkout: false

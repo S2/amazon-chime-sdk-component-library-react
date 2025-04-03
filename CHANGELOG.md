@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.11.0] - 2025-01-15
+## [3.11.0] - 2025-02-27
 
 ### Added
 
@@ -21,13 +21,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added support for styled-components v6. This change is compatible with both styled-components v5 and v6. styled-components v6 introduces various breaking changes. One major difference is that styled-components v6 omits automatic vendor prefixing by default. If you prefer the v5 behavior, refer to the [styled-components v6 migration guide](https://styled-components.com/docs/faqs#what-do-i-need-to-do-to-migrate-to-v6) for details.
+
 ### Removed
 
 ### Changed
 
 - Change to use loggers from `LoggerProvider` as default when initialize background blur/replacement processor.
+- Change to not log the entire stringified `options` object in background blur/replacement processor.
 
 ### Fixed
+
+- Fix conditions where `BackgroundReplacementProvider` needs to be re-rendered.
 
 ## [3.9.0] - 2024-04-12
 
@@ -81,9 +86,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ### Changed
+
 - Updated `ContentShare` to have optional nameplate prop.
+
 ### Fixed
-- Fix a bug where the `isVideoEnabled` is still true even when the video device is unplugged. 
+
+- Fix a bug where the `isVideoEnabled` is still true even when the video device is unplugged.
 
 - When audio inputs change in a meeting, `AudioInputProvider` will only automatically select a new audio input device if a meeting is joined with `DeviceLabels.Audio` or `DeviceLabels.AudioAndVideo` device labels.
 - Publish `MeetingStatus.Failed` only when a non-terminal failure is encountered. Currently, some Amazon Chime SDK for JavaScript meeting session statuses pass both the `sessionStatus.isFailure()` as well as `sessionStatus.isTerminal()` in JS SDK, thus, for a status if it is in both, it will be considered as non-terminal failure and `MeetingStatus.TerminalFailure` will never get set for such statuses. Check [MeetingSessionStatus](https://github.com/aws/amazon-chime-sdk-js/blob/main/src/meetingsession/MeetingSessionStatus.ts) file for more information on both methods in JS SDK.
@@ -92,18 +100,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Add support for Node.js 18.
+- Add support for Node.js 18.
 
 ### Removed
 
 ### Changed
+
 - Updated `VoiceFocusProvider` to destroy the Voice Focus worker thread on unmount.
 - Reverted changes to `BackgroundBlurProvider` and `BackgroundReplacemenProvider` to fix bug related to `isBackgroundBlurSupported` and `isBackgroundReplacementSupported` returning false.
 
 ### Fixed
 
-* Update the documentation to use `GlobalStyles` along with `ThemeProvider`.
-
+- Update the documentation to use `GlobalStyles` along with `ThemeProvider`.
 
 ## [3.4.0] - 2022-09-13
 
@@ -178,7 +186,7 @@ Below is a list of all changes in Amazon Chime SDK React Components Library v3. 
 - Remove preset device selection options ("None" and "440 Hz" for audio input device. "None", "Blue", and "SMTP Color Bars" for video input device). Remove `appendSampleDevices` from Props of `CameraSelection`, `MicSelection`, `AudioInputControl`, `AudioInputVFcontrol`, and `VideoInputControl`. Remove `DeviceConfig` type. Remove `additionalDevices` from Props of `useAudioInputs` and `useVideoInputs` hook.
 - Remove `useSelectAudioInputDevice`, `useSelectAudioOutputDevice` and `useSelectVideoInputDevice` hook.
 - Remove use of the deprecated `enableUnifiedPlanForChromiumBasedBrowsers` configuration variable.
-- Remove all deprecated `MeetingSessionStatusCode`.  
+- Remove all deprecated `MeetingSessionStatusCode`.
 - Remove legacy metrics `videoDownstreamGoogFrameHeight`, `videoDownstreamGoogFrameWidth`, `videoUpstreamGoogFrameHeight` and `videoUpstreamGoogFrameWidth` from the `videoStreamMetrics` returned by the `useMediaStreamMetrics` hook to adopt to Amazon Chime SDK for JavaScript V3 changes ([aws/amazon-chime-sdk-js#2086](https://github.com/aws/amazon-chime-sdk-js/pull/2086)).
 - Remove `MeetingSessionConfiguration` properties from `MeetingProvider` props.
 - Remove `deviceLabels`, `eventController`, `logLevel`, `postLogConfig`, `logger`, `enableWebAudio`, and `activeSpeakerPolicy` from `MeetingProvider` props.
@@ -224,7 +232,7 @@ Below is a list of all changes in Amazon Chime SDK React Components Library v3. 
 ### Removed
 
 - Remove use of the deprecated `enableUnifiedPlanForChromiumBasedBrowsers` configuration variable.
-- Remove all deprecated `MeetingSessionStatusCode`.  
+- Remove all deprecated `MeetingSessionStatusCode`.
 - Remove legacy metrics `videoDownstreamGoogFrameHeight`, `videoDownstreamGoogFrameWidth`, `videoUpstreamGoogFrameHeight` and `videoUpstreamGoogFrameWidth` from the `videoStreamMetrics` returned by the `useMediaStreamMetrics` hook to adopt to Amazon Chime SDK for JavaScript V3 changes ([aws/amazon-chime-sdk-js#2086](https://github.com/aws/amazon-chime-sdk-js/pull/2086)).
 - Deprecate `useBandwidthMetrics` hook as we already have `useMediaStreamMetrics`.
 - Remove `MeetingSessionConfiguration` properties from `MeetingProvider` props.

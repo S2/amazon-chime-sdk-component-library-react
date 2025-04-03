@@ -3,6 +3,7 @@
 
 import styled from 'styled-components';
 
+import { defaultStyledConfig } from '../../../../utils/style';
 import Flex from '..';
 
 export const Child = styled(Flex)`
@@ -25,14 +26,14 @@ export const Stack = styled(Flex)`
   padding: 1rem 20vw;
 `;
 
-export const StackChild = styled.div`
+export const StackChild = styled.div.withConfig(defaultStyledConfig)`
   height: 20vh;
   width: 20vw;
   margin: 1vh;
   background-color: ${(props) => props.theme.colors.primary.lightest};
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h1.withConfig(defaultStyledConfig)`
   background-color: ${(props) => props.theme.colors.primary.lightest};
   color: ${(props) => props.theme.colors.primary.darkest};
   padding: 2rem;
