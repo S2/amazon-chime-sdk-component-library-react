@@ -1,5 +1,8 @@
 {
   "name": "amazon-chime-sdk-component-library-react",
+  "dependencies": {
+      "amazon-chime-sdk-component-library-react" : "git+https://github.com/aws/amazon-chime-sdk-component-library-react.git#main"
+  },
   "version": "3.11.0",
   "description": "Amazon Chime SDK Component Library - React",
   "main": "lib/index.js",
